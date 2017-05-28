@@ -20,7 +20,6 @@ class NaiveBayes:
             for word in d:
                 self.vocabularies.add(word)
                 self.wordcount[tag][word] += 1
-        # 単語の条件付き確率の分母の値をあらかじめ一括計算しておく（高速化のため）
         for tag in self.categories:
             self.denominator[tag] = sum(self.wordcount[tag].values()) + len(self.vocabularies)
 
