@@ -1,6 +1,5 @@
 import requests
 import lxml.html
-import cssselect
 
 
 class article:
