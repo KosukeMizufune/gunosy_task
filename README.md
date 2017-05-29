@@ -11,19 +11,19 @@
 コラム：1963  
 おもしろ：1201  
 IT・科学：1972  
-グルメ：1956  '
+グルメ：1956  `
 
-##実行方法
-1 課題のgunosy_taskレポジトリをクローン
+##実行方法  
+1 課題のgunosy_taskレポジトリをクローン  
 `$git clone https://github.com/KosukeMizufune/gunosy_task.git`
 
-2 クローンしたgunosy_taskフォルダに移動
+2 クローンしたgunosy_taskフォルダに移動  
 `$cd gunosy task`
 
-3 記事データを取得する
-`$python gettrain.py`
-ただし、このままだとデータを取得するのに8時間ほどかかるので、検証用にアプリを起動するだけならばgettrain.pyの55行目の
-`while count < 100`
-を
-`while count < 任意の数`
+3 記事データを取得する  
+`$python gettrain.py`  
+ただし、このままだとデータを取得するのに8時間ほどかかるので、検証用にアプリを起動するだけならばgettrain.pyの55行目の  
+`while count < 100`  
+を  
+`while count < 任意の数`  
 などにすることで実行時間を短縮することで十分であると思われる
