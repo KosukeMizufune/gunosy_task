@@ -26,4 +26,21 @@ IT・科学：1972
 `while count < 100`  
 を  
 `while count < 任意の数`  
-などにすることで実行時間を短縮することで十分であると思われる
+などにすることで実行時間を短縮することで十分であると思われる  
+
+4 サーバーを起動する  
+`$python manage.py runserver`  
+と入力することでサーバーが起動する。記事データを訓練させるので立ち上がるまでにすこじ時間がかかる  
+
+5 4を実行後、以下のURLにアクセスする  
+http://127.0.0.1:8000/articleclass/url/  
+
+6 フォームにURLを入力する
+
+7 記事のカテゴリがURLフォームの下に表示される
+
+## 精度評価  
+14985件のデータを5-folds-crossvalidationによるaccuracyで評価をした結果、89%ほどの精度となった。  
+gunosy_taskレポジトリから精度評価をする方法は、  
+`$python cross_validation.py`  
+と入力することでaccuracyが表示される
