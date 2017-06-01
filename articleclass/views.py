@@ -21,13 +21,14 @@ def url_list(request):
     ar = article()
     ar.get_article(url)
     article_text = ar.article_text
-    doc = doctoword(article_text)
-    tag = nb.classify(doc)
+    if url is None:
+        tag = None
+    else:
+        doc = doctoword(article_text)
+        tag = nb.classify(doc)
     f = {
         'form': form,
         'url': url,
         'tag': tag,
     }
     return render(request, 'articleclass/url_list.html', f)
-
-
