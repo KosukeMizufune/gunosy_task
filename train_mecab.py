@@ -2,6 +2,8 @@ from pymongo import MongoClient
 import MeCab
 from random import shuffle
 
+# 訓練データをタグと形態素解析された記事データに分ける関数
+
 def train_MeCab():
     client = MongoClient('localhost')
     collection = client.scraping.article
@@ -13,7 +15,7 @@ def train_MeCab():
     data = []
     for info in infos:
         tokens = []
-        tags.append(info['tag'])
+        tags.append(info['tag'])    # 記事カテゴリー
         text = info['text']
         node = tagger.parseToNode(text)
         while node:
@@ -25,5 +27,5 @@ def train_MeCab():
                 else:
                     tokens.append(split[6])
             node = node.next
-        data.append(tokens)
+        data.append(tokens) # 形態素解析された単語のベクトル
     return([tags, data])
