@@ -5,7 +5,9 @@ import re
 from pymongo import MongoClient
 import traceback
 
+#訓練データを取得し、データベースに保存する
 
+# トップページからそれぞれのカテゴリーの記事をクロールし、そのカテゴリーと記事をスクレイプしMongoDBに保存するメインの関数
 def main():
     client = MongoClient('localhost')
     collection = client.scraping.article
@@ -35,24 +37,28 @@ def main():
             traceback.print_exc()
 
 
+# 同一の記事を取らないようにURLキーを識別するための関数
 def extract_key(url):
     m = re.search(r'/([^/]+)$', url)
     return m.group(1)
 
 
+# トップページからそれぞれのカテゴリーのトップページのURLを取ってくる関数
 def scrape_tag_page(response):
     root = lxml.html.fromstring(response.content)
     root.make_links_absolute(response.url)
     url_tag = [a.get('href') for a in root.cssselect('.nav_list > * > a')[1:9]]
     return url_tag
 
+
+# それぞれのカテゴリーのトップページから100ページ目までの記事のURLを取ってくる関数
 def get_article_page(response):
     url_tag = scrape_tag_page(response)
     session = requests.Session()
     for url in url_tag:
         count = 1
         try:
-            while count < 100:
+            while count <= 100:
                 response2 = session.get(url)
                 root2 = lxml.html.fromstring(response2.content)
                 root2.make_links_absolute(response2.url)
@@ -67,6 +73,7 @@ def get_article_page(response):
             continue
 
 
+# 記事URLからタグと記事、識別キーをスクレイプする関数
 def scrape_text(response):
     root3 = lxml.html.fromstring(response.text)
     text = [p.text_content() for p in root3.cssselect('.article > p')]
