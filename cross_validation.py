@@ -1,6 +1,8 @@
 from Naivebayes import NaiveBayes
 from train_mecab import train_MeCab
 
+#分類器に対して交差検証する関数
+
 tags, data = train_MeCab()
 
 def cv_accuracy(tags, data, K):
