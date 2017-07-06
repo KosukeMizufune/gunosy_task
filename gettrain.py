@@ -77,7 +77,8 @@ def scrape_text(response):
     text = [p.text_content() for p in root3.cssselect('.article > p')]
     text = ''.join(text)
     article = {
-        'tag': root3.cssselect('.breadcrumb_category span:nth-child(1)')[1].text_content(),
+        'tag': root3.cssselect('.breadcrumb_category'
+                               ' span:nth-child(1)')[1].text_content(),
         'text': text,
         'key': extract_key(response.url)
     }
