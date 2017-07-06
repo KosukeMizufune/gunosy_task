@@ -2,9 +2,9 @@ from pymongo import MongoClient
 import MeCab
 from random import shuffle
 
-# 訓練データをタグと形態素解析された記事データに分ける関数
 
-def train_MeCab():
+# 訓練データをタグと形態素解析された記事データに分ける関数
+def train_mecab():
     client = MongoClient('localhost')
     collection = client.scraping.article
     tagger = MeCab.Tagger("-Ochasen -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
@@ -27,5 +27,5 @@ def train_MeCab():
                 else:
                     tokens.append(split[6])
             node = node.next
-        data.append(tokens) # 形態素解析された単語のベクトル
-    return([tags, data])
+        data.append(tokens)  # 形態素解析された単語のベクトル
+    return [tags, data]
