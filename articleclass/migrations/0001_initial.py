@@ -16,8 +16,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='url_input',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('input', models.CharField(max_length=200, verbose_name='URL')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True,
+                                        serialize=False,
+                                        verbose_name='ID')),
+                ('input', models.CharField(max_length=200,
+                                           verbose_name='URL')),
             ],
         ),
     ]
