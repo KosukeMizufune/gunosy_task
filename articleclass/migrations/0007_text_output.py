@@ -21,10 +21,10 @@ class Migration(migrations.Migration):
                                         serialize=False,
                                         verbose_name='ID')),
                 ('url', models.ForeignKey(
-                                          on_delete=django.db.models.deletion.CASCADE,
-                                          related_name='text',
-                                          to='articleclass.url_input',
-                                          verbose_name='URL')),
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='text',
+                    to='articleclass.url_input',
+                    verbose_name='URL')),
             ],
         ),
     ]
