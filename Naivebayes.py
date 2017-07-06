@@ -1,8 +1,8 @@
 import math
 from collections import defaultdict
 
-# ナイーブベイズを行う
 
+# ナイーブベイズを行う
 class NaiveBayes:
     def __init__(self):
         self.categories = set()  # カテゴリの集合
@@ -10,7 +10,7 @@ class NaiveBayes:
         self.wordcount = {}  # wordcount[cat][word] カテゴリでの単語の出現回数
         self.tagcount = {}  # catcount[cat] カテゴリの出現回数
         self.denominator = {}  # denominator[cat] P(word|cat)の分母の値
-    
+
     # 分類するのに必要なパラメータを計算する関数
     def train(self, tags, data):
         for tag in tags:
@@ -25,7 +25,7 @@ class NaiveBayes:
                 self.wordcount[tag][word] += 1
         for tag in self.categories:
             self.denominator[tag] = sum(self.wordcount[tag].values()) + len(self.vocabularies)
-    
+
     # 未知の記事データからカテゴリを分類する関数
     def classify(self, doc):
         best = None
@@ -36,11 +36,11 @@ class NaiveBayes:
                 max = p
                 best = tag
         return best
-    
+
     # 各カテゴリーの各単語の生起確率
     def word_prob(self, word, tag):
         return float(self.wordcount[tag][word] + 1) / float(self.denominator[tag])
-    
+
     # 対数尤度関数
     def score(self, doc, tag):
         total = sum(self.tagcount.values())
@@ -48,5 +48,3 @@ class NaiveBayes:
         for word in doc:
             score += math.log(self.word_prob(word, tag))
         return score
-
-
