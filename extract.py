@@ -14,7 +14,8 @@ class GetArticle:
         try:
             target_html = requests.get(target_url).text
             root = lxml.html.fromstring(target_html)
-            articles = [p.text_content() for p in root.cssselect('.article > p')]
+            articles = \
+                [p.text_content() for p in root.cssselect('.article > p')]
             self.article_text = ''.join(articles)
         except HTTPError:
             return None
