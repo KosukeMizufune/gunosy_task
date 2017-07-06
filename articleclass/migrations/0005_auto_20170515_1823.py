@@ -30,7 +30,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='text_output',
             name='url',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+            field=models.ForeignKey(
+                                    on_delete=django.db.models.deletion.CASCADE,
                                     related_name='text',
                                     to='articleclass.url_input',
                                     verbose_name='URL'),
