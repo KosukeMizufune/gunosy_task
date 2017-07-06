@@ -2,12 +2,12 @@ import requests
 import lxml.html
 from urllib.error import HTTPError, URLError
 
-# 入力されたURLから記事データを取ってくる関数 
 
-class article:
+# 入力されたURLから記事データを取ってくる関数
+class GetArticle:
     def __init__(self):
         self.article_text = []
-    
+
     def get_article(self, target_url):
         if target_url is '' or target_url is None:
             return None
@@ -20,7 +20,3 @@ class article:
             return None
         except URLError:
             return None
-            
-
-
-
