@@ -15,7 +15,7 @@ def train_mecab():
     data = []
     for info in infos:
         tokens = []
-        tags.append(info['tag'])    # 記事カテゴリー
+        tags.append(info['tag'])  # 記事カテゴリー
         text = info['text']
         node = tagger.parseToNode(text)
         while node:
