@@ -49,7 +49,7 @@ def scrape_tag_page(response):
     return url_tag
 
 
-# それぞれのカテゴリーのトップページから100ページ目までの記事のURLを取ってくる関数
+# それぞれのカテゴリーのトップページから100ページ目までの記事のURLを入手する関数
 def get_article_page(response):
     url_tag = scrape_tag_page(response)
     session = requests.Session()
