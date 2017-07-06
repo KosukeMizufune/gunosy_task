@@ -24,7 +24,8 @@ class NaiveBayes:
                 self.vocabularies.add(word)
                 self.wordcount[tag][word] += 1
         for tag in self.categories:
-            self.denominator[tag] = sum(self.wordcount[tag].values()) + len(self.vocabularies)
+            self.denominator[tag] = \
+                sum(self.wordcount[tag].values()) + len(self.vocabularies)
 
     # 未知の記事データからカテゴリを分類する関数
     def classify(self, doc):
@@ -39,7 +40,8 @@ class NaiveBayes:
 
     # 各カテゴリーの各単語の生起確率
     def word_prob(self, word, tag):
-        return float(self.wordcount[tag][word] + 1) / float(self.denominator[tag])
+        return float(self.wordcount[tag][word] + 1) \
+               / float(self.denominator[tag])
 
     # 対数尤度関数
     def score(self, doc, tag):
