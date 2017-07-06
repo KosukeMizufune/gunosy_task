@@ -2,7 +2,7 @@ import math
 from collections import defaultdict
 
 
-# ナイーブベイズを行う
+# ナイーブベイズを行う関数
 class NaiveBayes:
     def __init__(self):
         self.categories = set()  # カテゴリの集合
