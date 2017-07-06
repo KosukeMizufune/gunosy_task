@@ -5,13 +5,14 @@ import re
 from pymongo import MongoClient
 import traceback
 
-#訓練データを取得し、データベースに保存する
+
+# 訓練データを取得し、データベースに保存する
 
 # トップページからそれぞれのカテゴリーの記事をクロールし、そのカテゴリーと記事をスクレイプしMongoDBに保存するメインの関数
 def main():
     client = MongoClient('localhost')
     collection = client.scraping.article
-    collection.create_index('key', unique = True)
+    collection.create_index('key', unique=True)
     session = requests.Session()
     response = session.get('https://gunosy.com/')
     urls = get_article_page(response)
@@ -30,9 +31,6 @@ def main():
             print('強制停止')
             break
         except IndexError:
-            print(url)
-            traceback.print_exc()
-        except:
             print(url)
             traceback.print_exc()
 
@@ -69,7 +67,7 @@ def get_article_page(response):
                 count += 1
                 time.sleep(1)
             time.sleep(1)
-        except:
+        except Exception:
             continue
 
 
