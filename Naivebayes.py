@@ -41,7 +41,7 @@ class NaiveBayes:
     # 各カテゴリーの各単語の生起確率
     def word_prob(self, word, tag):
         return float(self.wordcount[tag][word] + 1) / \
-               float(self.denominator[tag])
+            float(self.denominator[tag])
 
     # 対数尤度関数
     def score(self, doc, tag):
