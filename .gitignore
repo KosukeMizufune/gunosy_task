@@ -1,2 +1,3 @@
 .idea/
-__pycache__/
+gunosy/__pycache__/
+articleclass/__pycache__/
