@@ -4,21 +4,6 @@
 今回の訓練データはgunosyの各カテゴリのトップページから100ページ目までの記事を抽出  
 クロール過程で存在しないページは飛ばすようにしているのでおよそ15000件ほどの記事が手に入ると思われる  
 
-## 実行環境  
-python3.5.0  
-django1.10  
-certifi==2017.4.17  
-chardet==3.0.3  
-cssselect==1.0.1  
-Django==1.10  
-django-bootstrap-form==3.2.1  
-idna==2.5  
-lxml==3.7.3  
-mecab-python3==0.7  
-pymongo==3.4.0  
-requests==2.17.3  
-urllib3==1.21.1  
-
 ## 実行方法  
 1 課題のgunosy_taskレポジトリをクローン  
 `$git clone https://github.com/KosukeMizufune/gunosy_task.git`
