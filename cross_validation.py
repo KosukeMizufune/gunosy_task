@@ -2,7 +2,7 @@ from Naivebayes import NaiveBayes
 from train_mecab import train_mecab
 
 
-# 分類器に対してk-交差検証する関数
+# 分類器に対してk交差検証する関数
 
 
 tags, data = train_mecab()
