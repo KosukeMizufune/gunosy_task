@@ -1,7 +1,7 @@
 import MeCab
 
 
-# URLから入手した記事データを形態素解析する関数
+# URLから入手した記事を形態素解析する関数
 def doctoword(article):
     tagger = MeCab.Tagger("-Ochasen -d "
                           "/usr/local/lib/mecab/dic/mecab-ipadic-neologd")
