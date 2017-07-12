@@ -38,7 +38,7 @@ class NaiveBayes:
                 best = tag
         return best
 
-    # 各カテゴリーの各単語の生起確率
+    # 各カテゴリーの各単語の生起確率を計算
     def word_prob(self, word, tag):
         return float(self.wordcount[tag][word] + 1) / \
             float(self.denominator[tag])
