@@ -6,7 +6,7 @@ from pymongo import MongoClient
 import traceback
 
 
-# 訓練データを取得し、データベースに保存する
+# 訓練データを取得しデータベースに保存する
 
 # トップページからそれぞれのカテゴリーの記事をクロールし、そのカテゴリーと記事をスクレイプしMongoDBに保存するメインの関数
 def main():
