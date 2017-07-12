@@ -9,7 +9,6 @@ from train_mecab import train_mecab
 # Create your views here.
 
 tags, data = train_mecab()
-
 nb = NaiveBayes()
 nb.train(tags, data)
 
