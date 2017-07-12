@@ -3,7 +3,7 @@ import lxml.html
 from urllib.error import HTTPError, URLError
 
 
-# 入力されたURLから記事データを入手する関数
+# 入力されたURLから記事を入手する関数
 class GetArticle:
     def __init__(self):
         self.article_text = []
