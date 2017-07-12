@@ -3,7 +3,7 @@ import MeCab
 from random import shuffle
 
 
-# 訓練データをタグと形態素解析された記事データに分ける関数
+# 訓練データをカテゴリーと形態素解析された記事データに分ける関数
 def train_mecab():
     client = MongoClient('localhost')
     collection = client.scraping.article
