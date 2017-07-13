@@ -13,3 +13,4 @@ before_install:
     - pip install pep8
 script:
     - find . -name \*.py -exec pep8 {} +
+    - pep8 articleclass/views.py
