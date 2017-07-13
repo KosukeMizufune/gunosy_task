@@ -12,6 +12,4 @@ before_install:
     - sudo apt-get install -y mecab-ipadic-utf8
     - pip install pep8
 script:
-    - python pep8.py --testsuite testsuite
-    - python pep8.py --statistics pep8.py
-    - python pep8.py --doctest
+    - find . -name \*.py -exec pep8
