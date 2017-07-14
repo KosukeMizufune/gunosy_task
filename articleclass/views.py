@@ -1,16 +1,14 @@
 from django.shortcuts import render
 from Naivebayes import NaiveBayes
 from articleclass.forms import URLForm
-from extract import article
+from extract import GetArticle
 from mecab_article import doctoword
-from train_mecab import train_MeCab
+from train_mecab import train_mecab
 
 
 # Create your views here.
 
-
-tags, data = train_MeCab()
-
+tags, data = train_mecab()
 nb = NaiveBayes()
 nb.train(tags, data)
 
@@ -18,7 +16,7 @@ nb.train(tags, data)
 def url_list(request):
     form = URLForm(request.GET or None)
     url = request.POST.get('form')
-    ar = article()
+    ar = GetArticle()
     ar.get_article(url)
     article_text = ar.article_text
     if url is None:
