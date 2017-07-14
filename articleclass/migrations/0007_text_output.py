@@ -16,8 +16,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='text_output',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='text', to='articleclass.url_input', verbose_name='URL')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True,
+                                        serialize=False,
+                                        verbose_name='ID')),
+                ('url', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='text',
+                    to='articleclass.url_input',
+                    verbose_name='URL')),
             ],
         ),
     ]

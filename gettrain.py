@@ -5,13 +5,14 @@ import re
 from pymongo import MongoClient
 import traceback
 
-#訓練データを取得し、データベースに保存する
+
+# 訓練データを取得しデータベースに保存する
 
 # トップページからそれぞれのカテゴリーの記事をクロールし、そのカテゴリーと記事をスクレイプしMongoDBに保存するメインの関数
 def main():
     client = MongoClient('localhost')
     collection = client.scraping.article
-    collection.create_index('key', unique = True)
+    collection.create_index('key', unique=True)
     session = requests.Session()
     response = session.get('https://gunosy.com/')
     urls = get_article_page(response)
@@ -32,9 +33,6 @@ def main():
         except IndexError:
             print(url)
             traceback.print_exc()
-        except:
-            print(url)
-            traceback.print_exc()
 
 
 # 同一の記事を取らないようにURLキーを識別するための関数
@@ -51,7 +49,7 @@ def scrape_tag_page(response):
     return url_tag
 
 
-# それぞれのカテゴリーのトップページから100ページ目までの記事のURLを取ってくる関数
+# それぞれのカテゴリーのトップページから100ページ目までの記事のURLを入手する関数
 def get_article_page(response):
     url_tag = scrape_tag_page(response)
     session = requests.Session()
@@ -69,7 +67,7 @@ def get_article_page(response):
                 count += 1
                 time.sleep(1)
             time.sleep(1)
-        except:
+        except Exception:
             continue
 
 
@@ -79,7 +77,8 @@ def scrape_text(response):
     text = [p.text_content() for p in root3.cssselect('.article > p')]
     text = ''.join(text)
     article = {
-        'tag': root3.cssselect('.breadcrumb_category span:nth-child(1)')[1].text_content(),
+        'tag': root3.cssselect('.breadcrumb_category'
+                               ' span:nth-child(1)')[1].text_content(),
         'text': text,
         'key': extract_key(response.url)
     }
