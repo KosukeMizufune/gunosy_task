@@ -1,5 +1,5 @@
 # 記事URLを入力すると記事カテゴリーを返すWebアプリケーションの実装
-[![Build Status](https://travis-ci.org/c-bata/TDD-with-Django.svg)](https://travis-ci.org/c-bata/TDD-with-Django)
+[![Build Status](https://travis-ci.org/KosukeMizufune/gunosy_task.svg?branch=pep8-modify)](https://travis-ci.org/KosukeMizufune/gunosy_task)
 
 ## 訓練データ
 今回の訓練データはgunosyの各カテゴリのトップページから100ページ目までの記事を抽出  
