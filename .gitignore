@@ -1,9 +1,4 @@
 .idea/
-static/
-gunosy/__pycache__/
-articleclass/__pycache__/
-gunosy/__init__.py
+__pycache__/
 gunosy/wsgi.py
-articleclass/__init__.py
-manage.py
 db.sqlite3
