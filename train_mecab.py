@@ -1,6 +1,7 @@
-from pymongo import MongoClient
-import MeCab
 from random import shuffle
+
+import MeCab
+from pymongo import MongoClient
 
 
 # 訓練データをカテゴリーと形態素解析された記事データに分ける関数
