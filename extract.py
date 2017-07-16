@@ -1,6 +1,7 @@
-import requests
-import lxml.html
 from urllib.error import HTTPError, URLError
+
+import lxml.html
+import requests
 
 
 # 入力されたURLから記事を入手する関数
