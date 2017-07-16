@@ -1,4 +1,4 @@
-from Naivebayes import NaiveBayes
+from naivebayes import NaiveBayes
 from train_mecab import train_mecab
 
 
