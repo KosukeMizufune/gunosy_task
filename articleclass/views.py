@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Naivebayes import NaiveBayes
+from naivebayes import NaiveBayes
 from articleclass.forms import URLForm
 from extract import GetArticle
 from mecab_article import doctoword
