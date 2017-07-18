@@ -1,5 +1,5 @@
-import math
 from collections import defaultdict
+import math
 
 
 # ナイーブベイズを行う関数

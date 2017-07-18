@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from Naivebayes import NaiveBayes
-from articleclass.forms import URLForm
-from extract import get_article
+
 from mecab_article import doctoword
+from extract import get_article
+from Naivebayes import NaiveBayes
 from train_mecab import train_mecab
+from articleclass.forms import URLForm
 
 
 # Create your views here.

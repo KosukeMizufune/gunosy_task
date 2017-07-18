@@ -2,20 +2,20 @@ import MeCab
 
 
 # URLから入手した記事を形態素解析する関数
-def doctoword(article):
+def doctoword(doc):
     tagger = MeCab.Tagger("-Ochasen -d "
                           "/usr/local/lib/mecab/dic/mecab-ipadic-neologd")
     tagger.parse('')
-    node = tagger.parseToNode(article)
-    tokens = []
+    node = tagger.parseToNode(doc)
+    words = []
     while node:
         split = node.feature.split(',')
-        category, sub_category = split[:2]  # 品詞情報
-        if category == '名詞' or category == '形容詞' \
+        word_class, sub_category = split[:2]  # 品詞情報
+        if word_class == '名詞' or word_class == '形容詞' \
                 and sub_category in ('固有名詞', '一般'):
-            if split[6] == '*':
-                tokens.append(node.surface)
+            if split[6] == '*':  # 一部の名詞（英語など）で要素[6]（原型）が"*"になるので
+                words.append(node.surface)
             else:
-                tokens.append(split[6])
+                words.append(split[6])
         node = node.next
-    return tokens
+    return words
