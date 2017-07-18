@@ -25,7 +25,7 @@ def train_mecab():
             category, sub_category = split[:2]
             if category == '名詞' or category == '形容詞' \
                     and sub_category in ('固有名詞', '一般'):
-                if split[6] == '*':
+                if split[6] == '*':  # 一部の名詞（英語など）で要素[6]（原型）が"*"になるので
                     tokens.append(node.surface)
                 else:
                     tokens.append(split[6])
