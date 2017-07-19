@@ -6,7 +6,7 @@ import requests
 
 # 入力されたURLから記事を入手する関数
 def get_article(target_url):
-    if target_url is '' or target_url is None:
+    if not target_url:
         return None
     try:
         target_html = requests.get(target_url).text
