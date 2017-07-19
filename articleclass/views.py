@@ -1,4 +1,7 @@
+import urllib.error
+
 from django.shortcuts import render
+from django.http import HttpResponseBadRequest
 
 from mecab_article import doctoword
 from extract import get_article
@@ -14,15 +17,21 @@ nb = NaiveBayes()
 nb.train(tags, data)
 
 
-def url_list(request):
+def urltotag(request):
     form = URLForm(request.GET or None)
     target_url = request.POST.get('form')
-    article_text = get_article(target_url)
-    if target_url is None:
-        tag = None
+    tag = None
+    if not target_url:
+        pass
+    elif urllib.error.HTTPError:
+        return HttpResponseBadRequest('<h1>分類するページは見つかりません</h1>')
     else:
-        doc = doctoword(article_text)
-        tag = nb.classify(doc)
+        doc = get_article(target_url)
+        if not doc:
+            tag = "こちらのURLにはテキストは存在しないので分類できませんでした。テキストがあるかどうかをお確かめください。"
+        else:
+            words = doctoword(doc)
+            tag = nb.classify(words)
     f = {
         'form': form,
         'url': target_url,
