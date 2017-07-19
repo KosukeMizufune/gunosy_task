@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %}記事クラス分けフォーム{% endblock title %}
+
+{% block extrahead %}
+<style>
+table {
+  margin-top: 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <h3 class="page-header">記事クラス分けフォーム</h3>
+    <form action="{% url 'articleclass:urltotag' %}" method="post" class="form-horizontal" role="form">
+      {% csrf_token %}
+      {{ form|bootstrap_horizontal }}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">送信</button>
+        </div>
+      </div>
+    </form>
+    {% if tag %}
+        <p>{{ url }}のカテゴリーは{{tag}}</p><br>
+    {% endif %}
+{% endblock content %}
