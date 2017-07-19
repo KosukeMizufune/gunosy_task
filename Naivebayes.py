@@ -5,8 +5,8 @@ import math
 # ナイーブベイズを行う関数
 class NaiveBayes:
     def __init__(self):
-        self.categories = set()  # カテゴリの集合
-        self.vocabularies = set()  # ボキャブラリの集合
+        self.tags_set = set()  # カテゴリの集合
+        self.vocabularies_set = set()  # ボキャブラリの集合
         self.wordcount = {}  # wordcount[cat][word] カテゴリでの単語の出現回数
         self.tagcount = {}  # catcount[cat] カテゴリの出現回数
         self.denominator = {}  # denominator[cat] P(word|cat)の分母の値
@@ -14,18 +14,18 @@ class NaiveBayes:
     # 分類するのに必要なパラメータを計算する関数
     def train(self, tags, data):
         for tag in tags:
-            self.categories.add(tag)
-        for tag in self.categories:
+            self.tags_set.add(tag)
+        for tag in self.tags_set:
             self.wordcount[tag] = defaultdict(int)
             self.tagcount[tag] = 0
         for (tag, d) in zip(tags, data):
             self.tagcount[tag] += 1
             for word in d:
-                self.vocabularies.add(word)
+                self.vocabularies_set.add(word)
                 self.wordcount[tag][word] += 1
-        for tag in self.categories:
+        for tag in self.tags_set:
             self.denominator[tag] = \
-                sum(self.wordcount[tag].values()) + len(self.vocabularies)
+                sum(self.wordcount[tag].values()) + len(self.vocabularies_set)
 
     # 未知の記事データからカテゴリを分類する関数
     def classify(self, doc):
