@@ -1,7 +1,8 @@
-import urllib.error
-
-from django.shortcuts import render
+from lxml import etree
 from django.http import HttpResponseBadRequest
+from django.shortcuts import render
+import requests
+
 
 from mecab_article import doctoword
 from extract import get_article
@@ -20,21 +21,20 @@ nb.train(tags, data)
 def urltotag(request):
     form = URLForm(request.GET or None)
     target_url = request.POST.get('form')
-    tag = None
-    if not target_url:
-        pass
-    elif urllib.error.HTTPError:
-        return HttpResponseBadRequest('<h1>分類するページは見つかりません</h1>')
-    else:
+    try:
         doc = get_article(target_url)
         if not doc:
-            tag = "こちらのURLにはテキストは存在しないので分類できませんでした。テキストがあるかどうかをお確かめください。"
+            tag = "まだURLを未入力、もしくはテキストがないページになっているので分類できませんでした。"
         else:
             words = doctoword(doc)
             tag = nb.classify(words)
-    f = {
-        'form': form,
-        'url': target_url,
-        'tag': tag,
-    }
-    return render(request, 'articleclass/url_list.html', f)
+        f = {
+            'form': form,
+            'url': target_url,
+            'tag': tag,
+        }
+        return render(request, 'articleclass/urltotag.html', f)
+    except etree.XMLSyntaxError:
+        return HttpResponseBadRequest('<h1>URLが間違っています。Gunosyの記事URLを入力してください</h1>')
+    except requests.ConnectionError:
+        return HttpResponseBadRequest('<h1>URLが不正です。Gunosyの記事URLを入力してください</h1>')
