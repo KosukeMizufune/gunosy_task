@@ -35,6 +35,8 @@ def urltotag(request):
         }
         return render(request, 'articleclass/urltotag.html', f)
     except etree.XMLSyntaxError:
-        return HttpResponseBadRequest('<h1>URLが間違っています。Gunosyの記事URLを入力してください</h1>')
+        return HttpResponseBadRequest(
+            '<h1>URLが間違っています。Gunosyの記事URLを入力してください</h1>')
     except requests.ConnectionError:
-        return HttpResponseBadRequest('<h1>URLが不正です。Gunosyの記事URLを入力してください</h1>')
+        return HttpResponseBadRequest(
+            '<h1>URLが不正です。Gunosyの記事URLを入力してください</h1>')
