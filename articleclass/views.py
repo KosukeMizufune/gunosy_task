@@ -1,9 +1,13 @@
+from lxml import etree
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render
-from naivebayes import NaiveBayes
-from articleclass.forms import URLForm
-from extract import GetArticle
+import requests
+
 from mecab_article import doctoword
+from extract import get_article
+from naivebayes import NaiveBayes
 from train_mecab import train_mecab
+from articleclass.forms import URLForm
 
 
 # Create your views here.
@@ -13,20 +17,25 @@ nb = NaiveBayes()
 nb.train(tags, data)
 
 
-def url_list(request):
+def urltotag(request):
     form = URLForm(request.GET or None)
-    url = request.POST.get('form')
-    ar = GetArticle()
-    ar.get_article(url)
-    article_text = ar.article_text
-    if url is None:
-        tag = None
-    else:
-        doc = doctoword(article_text)
-        tag = nb.classify(doc)
-    f = {
-        'form': form,
-        'url': url,
-        'tag': tag,
-    }
-    return render(request, 'articleclass/url_list.html', f)
+    target_url = request.POST.get('form')
+    try:
+        doc = get_article(target_url)
+        if not doc:
+            tag = "まだURLを未入力、もしくはテキストがないページになっているので分類できませんでした。"
+        else:
+            words = doctoword(doc)
+            tag = nb.classify(words)
+        f = {
+            'form': form,
+            'url': target_url,
+            'tag': tag,
+        }
+        return render(request, 'articleclass/urltotag.html', f)
+    except etree.XMLSyntaxError:
+        return HttpResponseBadRequest(
+            '<h1>URLが間違っています。Gunosyの記事URLを入力してください</h1>')
+    except requests.ConnectionError:
+        return HttpResponseBadRequest(
+            '<h1>URLが不正です。Gunosyの記事URLを入力してください</h1>')

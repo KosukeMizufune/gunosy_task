@@ -1,9 +1,10 @@
-import requests
-import lxml.html
-import time
 import re
-from pymongo import MongoClient
+import time
 import traceback
+
+import lxml.html
+from pymongo import MongoClient
+import requests
 
 
 # 訓練データを取得しデータベースに保存する
