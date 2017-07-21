@@ -1,14 +1,16 @@
-from Naivebayes import NaiveBayes
+from naivebayes import NaiveBayes
 from train_mecab import train_mecab
 
 
-# 分類器に対してk交差検証する関数
-
-
-tags, data = train_mecab()
-
-
 def cv_accuracy(tags, data, k):
+    """
+    分類器に対してk交差検証する関数
+
+    :param tags: list, 記事のタグ
+    :param data: list, 記事のテキストデータ
+    :param k: int, k交差検証のk
+    :return average: float, k交差検証で計算されたaccuracyの平均値
+    """
     accuracylist = []
     for n in range(k):  # 各分割について
         # 訓練データとテストデータにわける
@@ -27,10 +29,11 @@ def cv_accuracy(tags, data, k):
             if tag == predict:
                 hit += 1
             numtest += 1
-        accuracy = float(hit) / float(numtest)
+        accuracy = hit / numtest
         accuracylist.append(accuracy)
-    average = sum(accuracylist) / float(k)
+    average = sum(accuracylist) / k
     return average
 
 if __name__ == "__main__":
+    tags, data = train_mecab()
     print(cv_accuracy(tags, data, 5))

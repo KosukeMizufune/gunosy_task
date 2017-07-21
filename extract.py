@@ -4,9 +4,14 @@ import lxml.html
 import requests
 
 
-# 入力されたURLから記事を入手する関数
 def get_article(target_url):
-    if target_url is '' or target_url is None:
+    """
+    入力されたURLから記事を入手する関数
+
+    :param target_url: str, フォームに入力されるURL
+    :return article_text: str, URL先のテキスト
+    """
+    if not target_url:
         return None
     try:
         target_html = requests.get(target_url).text
