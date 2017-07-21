@@ -30,11 +30,11 @@ class NaiveBayes:
     # 未知の記事データからカテゴリを分類する関数
     def classify(self, doc):
         best = None
-        top = -float('inf')
+        max_prob = -float('inf')
         for tag in self.tagcount.keys():
             p = self.score(doc, tag)
-            if p >= top:
-                top = p
+            if p >= max_prob:
+                max_prob = p
                 best = tag
         return best
 
