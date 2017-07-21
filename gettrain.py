@@ -9,8 +9,10 @@ import requests
 
 # 訓練データを取得しデータベースに保存する
 
-# トップページからそれぞれのカテゴリーの記事をクロールし、そのカテゴリーと記事をスクレイプしMongoDBに保存するメインの関数
 def main():
+    """
+    トップページからそれぞれのカテゴリーの記事をクロールし、そのカテゴリーと記事をスクレイプしMongoDBに保存する関数
+    """
     client = MongoClient('localhost')
     collection = client.scraping.article
     collection.create_index('key', unique=True)
@@ -36,22 +38,36 @@ def main():
             traceback.print_exc()
 
 
-# 同一の記事を取らないようにURLキーを識別するための関数
 def extract_key(url):
+    """
+    同一の記事を取らないようにURLキーを識別するための関数
+
+    :param url: str, スクレイプする記事のURL
+    :return: str, URLの末尾のISBN
+    """
     m = re.search(r'/([^/]+)$', url)
     return m.group(1)
 
 
-# トップページからそれぞれのカテゴリーのトップページのURLを取ってくる関数
 def scrape_tag_page(response):
+    """
+    トップページからそれぞれのカテゴリーのトップページのURLを取ってくる関数
+
+    :param response: requests.models.Response, URLから読み込まれたwebページ
+    :return url_tag: list, それぞれのカテゴリーのトップページのURL
+    """
     root = lxml.html.fromstring(response.content)
     root.make_links_absolute(response.url)
     url_tag = [a.get('href') for a in root.cssselect('.nav_list > * > a')[1:9]]
     return url_tag
 
 
-# それぞれのカテゴリーのトップページから100ページ目までの記事のURLを入手する関数
 def get_article_page(response):
+    """
+    それぞれのカテゴリーのトップページから100ページ目までの記事のURLを入手する関数
+
+    :param response: requests.models.Response, URLから読み込まれたwebページ
+    """
     url_tag = scrape_tag_page(response)
     session = requests.Session()
     for url in url_tag:
@@ -72,8 +88,13 @@ def get_article_page(response):
             continue
 
 
-# 記事URLからタグと記事、識別キーをスクレイプする関数
 def scrape_text(response):
+    """
+    記事URLからタグと記事、識別キーをスクレイプする関数
+
+    :param response: requests.models.Response, URLから読み込まれたwebページ
+    :return article: dict, 記事のタグとテキストデータ、識別キー
+    """
     root3 = lxml.html.fromstring(response.text)
     text = [p.text_content() for p in root3.cssselect('.article > p')]
     text = ''.join(text)
