@@ -9,7 +9,7 @@ def cv_accuracy(tags, data, k):
     :param tags: list, 記事のタグ
     :param data: list, 記事のテキストデータ
     :param k: int, k交差検証のk
-    :return average: float, k交差検証で計算されたaccuracyの平均値
+    :return: float, k交差検証で計算されたaccuracyの平均値
     """
     accuracylist = []
     for n in range(k):  # 各分割について
