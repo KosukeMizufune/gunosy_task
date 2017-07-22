@@ -37,7 +37,7 @@ class NaiveBayes:
         未知の記事データからカテゴリを分類する関数
 
         :param doc: list, １文書内の単語のベクトル
-        :return : str, 対数尤度の最も大きなカテゴリー
+        :return: str, 対数尤度の最も大きなカテゴリー
         """
         best = None
         max_prob = -float('inf')
@@ -64,7 +64,7 @@ class NaiveBayes:
 
         :param doc: list, １文書内の単語のベクトル
         :param tag: str, 記事のタグ
-        :return : float, 対数尤度
+        :return: float, 対数尤度
         """
         total = sum(self.tagcount.values())
         score = math.log(float(self.tagcount[tag]) / total)
