@@ -9,7 +9,7 @@ def get_article(target_url):
     入力されたURLから記事を入手する関数
 
     :param target_url: str, フォームに入力されるURL
-    :return article_text: str, URL先のテキスト
+    :return: str, URL先のテキスト
     """
     if not target_url:
         return None
