@@ -54,7 +54,7 @@ def scrape_tag_page(response):
     トップページからそれぞれのカテゴリーのトップページのURLを取ってくる関数
 
     :param response: requests.models.Response, URLから読み込まれたwebページ
-    :return : list, それぞれのカテゴリーのトップページのURL
+    :return: list, それぞれのカテゴリーのトップページのURL
     """
     root = lxml.html.fromstring(response.content)
     root.make_links_absolute(response.url)
@@ -93,7 +93,7 @@ def scrape_text(response):
     記事URLからタグと記事、識別キーをスクレイプする関数
 
     :param response: requests.models.Response, URLから読み込まれたwebページ
-    :return : dict, 記事のタグとテキストデータ、識別キー
+    :return: dict, 記事のタグとテキストデータ、識別キー
     """
     root3 = lxml.html.fromstring(response.text)
     text = [p.text_content() for p in root3.cssselect('.article > p')]
