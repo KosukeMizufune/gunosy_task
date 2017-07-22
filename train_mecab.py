@@ -10,7 +10,7 @@ def train_mecab():
     訓練データをカテゴリーと形態素解析された記事データに分ける関数
 
     :return tags: list, 記事のタグ
-    :return : (list,list), 記事のテキストデータ
+    :return: (list,list), 記事のテキストデータ
     """
     client = MongoClient('localhost')
     collection = client.scraping.article
