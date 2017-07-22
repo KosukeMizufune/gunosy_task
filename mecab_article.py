@@ -6,7 +6,7 @@ def doctoword(doc):
     URLから入手した記事を形態素解析する関数
 
     :param doc: str, URLから入手した記事のテキストデータ
-    :return words: list, 形態素解析された単語のベクトル
+    :return : list, 形態素解析された単語のベクトル
     """
     tagger = MeCab.Tagger("-Ochasen -d "
                           "/usr/local/lib/mecab/dic/mecab-ipadic-neologd")
