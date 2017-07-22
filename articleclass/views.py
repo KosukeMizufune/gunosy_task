@@ -21,7 +21,7 @@ def urltotag(request):
     """
     入力されたURLからテキストデータを入手し、記事タグを表示させる関数
 
-    :param request: str, 入力画面からのリクエスト
+    :param request: HttpRequest, 入力画面からのリクエスト
     :return: 正当なURLと不正な場合でそれぞれのページに飛ばす
     """
     form = URLForm(request.GET or None)
