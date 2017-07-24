@@ -3,3 +3,4 @@ __pycache__/
 static/
 *.pyc
 db.sqlite3
+naivebayes.cmp
