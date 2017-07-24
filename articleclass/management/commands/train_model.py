@@ -1,17 +1,20 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from sklearn.externals import joblib
 
-from train_mecab import train_mecab
 from naivebayes import NaiveBayes
+from train_mecab import train_mecab
 
 
 class Command(BaseCommand):
     help = 'Train naivebayes model'
 
-    def add_arguments(self, parser):
-        parser.add_argument('train_model')
-
     def handle(self, *args, **options):
+        """
+        コマンドが実行された際に呼ばれるメソッド
+
+        :param args: tuple, 余った引数を受け取るタプル
+        :param options: dict, 余ったキーワード引数を受け取り
+        """
         nb = NaiveBayes()
         tags, data = train_mecab()
         nb.train(tags, data)
