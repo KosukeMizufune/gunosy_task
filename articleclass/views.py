@@ -1,20 +1,15 @@
 from lxml import etree
 from django.http import HttpResponseBadRequest
+from sklearn.externals import joblib
 from django.shortcuts import render
 import requests
 
 from mecab_article import doctoword
 from extract import get_article
-from naivebayes import NaiveBayes
-from train_mecab import train_mecab
 from articleclass.forms import URLForm
 
 
 # Create your views here.
-
-tags, data = train_mecab()
-nb = NaiveBayes()
-nb.train(tags, data)
 
 
 def urltotag(request):
@@ -32,6 +27,7 @@ def urltotag(request):
             tag = "まだURLを未入力、もしくはテキストがないページになっているので分類できませんでした。"
         else:
             words = doctoword(doc)
+            nb = joblib.load('naivebayes.cmp')
             tag = nb.classify(words)
         f = {
             'form': form,
