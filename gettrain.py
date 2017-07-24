@@ -5,20 +5,23 @@ import traceback
 import lxml.html
 from pymongo import MongoClient
 import requests
+from lxml.etree import XMLSyntaxError
 
 
 # 訓練データを取得しデータベースに保存する
 
-def main():
+def get_data(page_count):
     """
     トップページからそれぞれのカテゴリーの記事をクロールし、そのカテゴリーと記事をスクレイプしMongoDBに保存する関数
+
+    :param page_count: int, スクレイプする予定の、各タグの記事一覧ページの数
     """
     client = MongoClient('localhost')
     collection = client.scraping.article
     collection.create_index('key', unique=True)
     session = requests.Session()
     response = session.get('https://gunosy.com/')
-    urls = get_article_page(response)
+    urls = get_article_page(response, page_count)
     collection.delete_many({})
     for url in urls:
         try:
@@ -35,6 +38,8 @@ def main():
             break
         except IndexError:
             print(url)
+            traceback.print_exc()
+        except XMLSyntaxError:
             traceback.print_exc()
 
 
@@ -62,18 +67,19 @@ def scrape_tag_page(response):
     return url_tag
 
 
-def get_article_page(response):
+def get_article_page(response, page_count):
     """
     それぞれのカテゴリーのトップページから100ページ目までの記事のURLを入手する関数
 
     :param response: requests.models.Response, URLから読み込まれたwebページ
+    :param page_count: int, スクレイプする予定の、各タグの記事一覧ページの数
     """
     url_tag = scrape_tag_page(response)
     session = requests.Session()
     for url in url_tag:
         count = 1
         try:
-            while count <= 100:
+            while count <= page_count[0]:
                 response2 = session.get(url)
                 root2 = lxml.html.fromstring(response2.content)
                 root2.make_links_absolute(response2.url)
@@ -105,6 +111,3 @@ def scrape_text(response):
         'key': extract_key(response.url)
     }
     return article
-
-if __name__ == "__main__":
-    main()
