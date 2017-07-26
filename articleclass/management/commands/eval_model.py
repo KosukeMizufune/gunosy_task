@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from cross_validation import cv_accuracy
-from train_mecab import train_mecab
+from utils import get_train_data
 
 
 class Command(BaseCommand):
@@ -23,6 +23,6 @@ class Command(BaseCommand):
         :param options: dict, 余ったキーワード引数を受け取り
         """
         k = options['number_split'][0]
-        tags, data = train_mecab()
+        tags, data = get_train_data()
         print(cv_accuracy(tags, data, k))
         self.stdout.write(self.style.SUCCESS('Successfully trained model'))
