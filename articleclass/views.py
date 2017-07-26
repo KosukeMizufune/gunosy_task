@@ -4,8 +4,7 @@ from sklearn.externals import joblib
 from django.shortcuts import render
 import requests
 
-from mecab_article import doctoword
-from extract import get_article
+from utils import doctoword, get_article
 from articleclass.forms import URLForm
 
 
