@@ -1,10 +1,10 @@
 from urllib.error import HTTPError, URLError
 import lxml.html
 import requests
-from random import shuffle
 
 import MeCab
-from pymongo import MongoClient
+
+from articleclass.models import Article
 
 
 def doctoword(doc):
@@ -61,15 +61,14 @@ def get_train_data():
     :return tags: list, 記事のタグ
     :return: (list,list), 記事のテキストデータ
     """
-    client = MongoClient('localhost')
-    collection = client.scraping.article
-    infos = [x for x in collection.find()]
-    shuffle(infos)
+    len_article = Article.objects.count()
     tags = []
     data = []
-    for info in infos:
-        tags.append(info['tag'])  # 記事カテゴリー
-        text = info['text']
-        words = doctoword(text)
+    for i in range(len_article):
+        i += 1  # iが0から始まるので1から始まるように1をたす
+        ar = Article.objects.get(pk=i)
+        tags.append(ar.tag)  # 記事カテゴリー
+        doc = ar.doc
+        words = doctoword(doc)
         data.append(words)  # 形態素解析された単語のベクトル
     return [tags, data]
