@@ -4,7 +4,7 @@ import requests
 
 import MeCab
 
-from articleclass.models import Article
+from articles.models import Article
 
 
 def doctoword(doc):
