@@ -33,7 +33,7 @@ def urltotag(request):
             'url': target_url,
             'tag': tag,
         }
-        return render(request, 'articleclass/urltotag.html', f)
+        return render(request, 'articles/urltotag.html', f)
     except etree.XMLSyntaxError:
         return HttpResponseBadRequest(
             '<h1>URLが間違っています。Gunosyの記事URLを入力してください</h1>')
