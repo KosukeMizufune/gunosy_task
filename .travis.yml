@@ -12,4 +12,4 @@ before_install:
     - sudo apt-get install -y mecab-ipadic-utf8
     - pip install pep8
 script:
-    - pep8 articleclass/views.py
+    - pep8 articles/views.py
