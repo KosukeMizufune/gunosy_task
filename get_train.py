@@ -6,7 +6,7 @@ import lxml.html
 import requests
 from lxml.etree import XMLSyntaxError
 
-from articleclass.models import Article
+from articles.models import Article
 
 
 # 訓練データを取得しデータベースに保存する
@@ -31,7 +31,8 @@ def get_data(page_count):
                 Article(tag=article['tag'], doc=article['doc'], key=article['key']).save()
                 print(url)
         except KeyboardInterrupt:
-            print('強制停止')
+            print('[get_train.py] get_data_function failed forcibly'
+                  ' due to KeyboardInterrupt')
             break
         except IndexError:
             print(url)
