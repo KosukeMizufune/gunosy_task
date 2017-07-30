@@ -2,7 +2,7 @@ import argparse
 
 from django.core.management.base import BaseCommand
 
-from gettrain import get_data
+from get_train import get_data
 
 
 class Command(BaseCommand):

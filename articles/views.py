@@ -5,7 +5,7 @@ from django.shortcuts import render
 import requests
 
 from utils import doctoword, get_article
-from articleclass.forms import URLForm
+from articles.forms import URLForm
 
 
 # Create your views here.
