@@ -13,7 +13,7 @@ table {
 
 {% block content %}
     <h3 class="page-header">記事クラス分けフォーム</h3>
-    <form action="{% url 'articleclass:urltotag' %}" method="post" class="form-horizontal" role="form">
+    <form action="{% url 'articles:urltotag' %}" method="post" class="form-horizontal" role="form">
       {% csrf_token %}
       {{ form|bootstrap_horizontal }}
       <div class="form-group">
