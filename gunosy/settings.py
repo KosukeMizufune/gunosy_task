@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrapform',
-    'articleclass'
+    'articles'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'article',
         'USER': 'root',
-        'PASSWORD': 'Mizz_django1',
+        'PASSWORD': '*********',
         'HOST': '',
         'PORT': '',
     }
